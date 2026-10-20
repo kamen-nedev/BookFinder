@@ -27,7 +27,7 @@ const SearchScreen = () => {
   const totalCount = data?.pages[0]?.numFound ?? 0;
 
   const handleBookPress = (book: BookSearchDoc) => {
-    navigation.navigate("BookDetails", { title: book.title });
+    navigation.navigate("BookDetails", { book });
   };
 
   const handleEndReached = () => {

@@ -1,8 +1,10 @@
 import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import type { BookSearchDoc } from '@src/features/search/types';
+
 export type RootStackParamList = {
   Search: undefined;
-  BookDetails: { title: string };
+  BookDetails: { book: BookSearchDoc };
 };
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;

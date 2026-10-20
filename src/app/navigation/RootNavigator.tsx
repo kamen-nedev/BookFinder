@@ -35,7 +35,7 @@ export const RootNavigator = () => {
         <Stack.Screen
           name="BookDetails"
           component={BookDetailsScreen}
-          options={({ route }) => ({ title: route.params.title, headerBackButtonDisplayMode: 'minimal' })}
+          options={({ route }) => ({ title: route.params.book.title })}
         />
       </Stack.Navigator>
     </NavigationContainer>
