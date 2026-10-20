@@ -4,6 +4,7 @@ const colors = {
   tertiary: '#F3ECD3',
   background: '#FCFCF2',
   text: '#333333',
+  muted: '#8A8A8A',
   border: '#EEEEEE',
 }
 
