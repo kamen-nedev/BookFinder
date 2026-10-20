@@ -4,15 +4,17 @@ import { Text } from "@ui";
 import spacing from "@src/ui/tokens/spacing";
 
 import type { BookSearchDoc } from "../types";
+import BookCard from "./BookCard";
 
 type SearchResultsProps = {
   query: string;
   books?: BookSearchDoc[];
   isFetching: boolean;
   isError: boolean;
+  onBookPress: (book: BookSearchDoc) => void;
 };
 
-const SearchResults = ({ query, books, isFetching, isError }: SearchResultsProps) => {
+const SearchResults = ({ query, books, isFetching, isError, onBookPress }: SearchResultsProps) => {
   if (!query) {
     return null;
   }
@@ -31,11 +33,9 @@ const SearchResults = ({ query, books, isFetching, isError }: SearchResultsProps
 
   return (
     <View style={styles.list}>
+      <Text size="lg" weight="bold">Search Results:</Text>
       {books.map((book) => (
-        <View key={book.key}>
-          <Text weight="bold">{book.title}</Text>
-          {book.author_name && <Text size="sm">{book.author_name.join(", ")}</Text>}
-        </View>
+        <BookCard key={book.key} book={book} onPress={() => onBookPress(book)} />
       ))}
     </View>
   );
@@ -45,6 +45,6 @@ export default SearchResults;
 
 const styles = StyleSheet.create({
   list: {
-    gap: spacing.md,
+    gap: spacing.sm,
   },
 });

@@ -2,13 +2,14 @@ import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Button, Input, PageWrapper } from "@ui";
+import { Input, PageWrapper } from "@ui";
 import { RootStackNavigationProp } from "@src/app/navigation/types";
 import useDebouncedValue from "@src/shared/hooks/useDebouncedValue";
 import spacing from "@src/ui/tokens/spacing";
 
 import { useSearchBooksQuery } from "../api/searchApi";
 import SearchResults from "../components/SearchResults";
+import type { BookSearchDoc } from "../types";
 
 const SEARCH_DEBOUNCE_MS = 400;
 const MIN_QUERY_LENGTH = 3;
@@ -24,8 +25,8 @@ const SearchScreen = () => {
     { skip: !searchQuery },
   );
 
-  const handleSeeBookDetails = () => {
-    navigation.navigate("BookDetails", { title: "The Great Gatsby" });
+  const handleBookPress = (book: BookSearchDoc) => {
+    navigation.navigate("BookDetails", { title: book.title });
   };
 
   return (
@@ -46,8 +47,8 @@ const SearchScreen = () => {
             books={data?.docs}
             isFetching={isFetching}
             isError={isError}
+            onBookPress={handleBookPress}
           />
-          <Button text="Go to Book Details" onPress={handleSeeBookDetails} />
         </ScrollView>
       </View>
     </PageWrapper>

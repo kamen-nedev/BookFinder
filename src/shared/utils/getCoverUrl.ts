@@ -1,0 +1,1 @@
+export const getCoverUrl = (coverId: number) => `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
