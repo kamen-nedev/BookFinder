@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import { Text } from "@ui";
@@ -10,13 +11,13 @@ import type { BookSearchDoc } from "../types";
 
 type BookCardProps = {
   book: BookSearchDoc;
-  onPress: () => void;
+  onPress: (book: BookSearchDoc) => void;
 };
 
 const BookCard = ({ book, onPress }: BookCardProps) => {
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => onPress(book)}
       accessibilityRole="button"
       style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
     >
@@ -51,7 +52,7 @@ const BookCard = ({ book, onPress }: BookCardProps) => {
   );
 };
 
-export default BookCard;
+export default memo(BookCard);
 
 const styles = StyleSheet.create({
   card: {

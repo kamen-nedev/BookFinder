@@ -1,4 +1,5 @@
-import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import { memo, useCallback } from "react";
+import { ActivityIndicator, FlatList, type ListRenderItemInfo, StyleSheet } from "react-native";
 
 import { Text } from "@ui";
 import colors from "@src/ui/tokens/colors";
@@ -18,6 +19,8 @@ type SearchResultsProps = {
   onEndReached: () => void;
 };
 
+const keyExtractor = (book: BookSearchDoc) => book.key;
+
 const SearchResults = ({
   query,
   books,
@@ -28,6 +31,11 @@ const SearchResults = ({
   onBookPress,
   onEndReached,
 }: SearchResultsProps) => {
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<BookSearchDoc>) => <BookCard book={item} onPress={onBookPress} />,
+    [onBookPress],
+  );
+
   if (!query) {
     return null;
   }
@@ -57,8 +65,8 @@ const SearchResults = ({
   return (
     <FlatList
       data={books}
-      keyExtractor={(book) => book.key}
-      renderItem={({ item }) => <BookCard book={item} onPress={() => onBookPress(item)} />}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
       ListHeaderComponent={
         <Text size="lg" weight="bold">
           {totalCount.toLocaleString()} {totalCount === 1 ? "Result" : "Results"} found
@@ -72,7 +80,7 @@ const SearchResults = ({
   );
 };
 
-export default SearchResults;
+export default memo(SearchResults);
 
 const styles = StyleSheet.create({
   list: {

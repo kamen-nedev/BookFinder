@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -23,18 +23,21 @@ const SearchScreen = () => {
   const { data, isFetching, isFetchingNextPage, isError, hasNextPage, fetchNextPage } =
     useSearchBooksInfiniteQuery({ query: searchQuery }, { skip: !searchQuery });
 
-  const books = data?.pages.flatMap((page) => page.docs) ?? [];
+  const books = useMemo(() => data?.pages.flatMap((page) => page.docs) ?? [], [data]);
   const totalCount = data?.pages[0]?.numFound ?? 0;
 
-  const handleBookPress = (book: BookSearchDoc) => {
-    navigation.navigate("BookDetails", { book });
-  };
+  const handleBookPress = useCallback(
+    (book: BookSearchDoc) => {
+      navigation.navigate("BookDetails", { book });
+    },
+    [navigation],
+  );
 
-  const handleEndReached = () => {
+  const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetching) {
       fetchNextPage();
     }
-  };
+  }, [hasNextPage, isFetching, fetchNextPage]);
 
   return (
     <PageWrapper headerProps={{ title: "Dashboard" }}>
