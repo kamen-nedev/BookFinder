@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
-
-import { BookDetailsScreenProps } from "../../../app/navigation/types";
+import { PageWrapper, Text } from "@ui";
+import { BookDetailsScreenProps } from "@src/app/navigation/types";
 
 const BookDetailsScreen = ({ route }: BookDetailsScreenProps) => {
   const { title } = route.params;
 
   return (
-    <View>
+    <PageWrapper headerProps={{ title: "Book Details" }}>
       <Text>Book Details for "{title}"</Text>
-    </View>
-  )
-}
+    </PageWrapper>
+  );
+};
 
 export default BookDetailsScreen;

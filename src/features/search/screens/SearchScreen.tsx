@@ -1,23 +1,21 @@
-import { Button, Text, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
-import { RootStackNavigationProp } from "../../../app/navigation/types";
+
+import { Button, PageWrapper, Text } from "@ui";
+import { RootStackNavigationProp } from "@src/app/navigation/types";
 
 const SearchScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const handleSeeBookDetails = () => {
-    navigation.navigate('BookDetails', { title: 'The Great Gatsby' });
-  }
+    navigation.navigate("BookDetails", { title: "The Great Gatsby" });
+  };
 
   return (
-    <View>
+    <PageWrapper shouldScroll headerProps={{ title: "Dashboard" }}>
       <Text>Search</Text>
-      <Button
-        title="Go to Book Details"
-        onPress={handleSeeBookDetails}
-      />
-    </View>
-  )
-}
+      <Button text="Go to Book Details" onPress={handleSeeBookDetails} />
+    </PageWrapper>
+  );
+};
 
 export default SearchScreen;
