@@ -15,6 +15,4 @@ export type SearchBooksResponse = {
 
 export type SearchBooksParams = {
   query: string;
-  page?: number;
-  limit?: number;
 };
