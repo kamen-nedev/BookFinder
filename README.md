@@ -95,3 +95,20 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# Notes from Kamen
+The assignment took me about 5 to 6 hours to complete. If this was a real project intended to scale, I would:
+
+- Invest in both unit and end-to-end testing, covering the API data mapping, component behaviour, and the main flow from search to book details.
+- Set up CI/CD pipelines and pre-commit hooks so linting, type checking and tests run on every change.
+- Set up Sentry or other error monitoring tool.
+- Set up the project properly for multiple environments (dev, staging, production), with separate configs and API URLs.
+- Tighten the existing linting setup with stricter rules (import ordering, accessibility checks) and enforce formatting with Prettier.
+- Enable the React Compiler rather than maintaining memoization by hand.
+- Pass only the book ID between screens instead of the whole object, and add deep linking support.
+- Improve offline support. Currently I only show a banner, and RTK Query's cache is in memory only; I would persist it so previously viewed searches and books are available offline.
+- Add theming (light and dark) and spend more time on the UI layer, so feature code only uses our own UI components and never imports react-native primitives directly.
+- Add localization instead of hard-coded strings.
+- Give accessibility more attention: labels, hints, and testing with VoiceOver and TalkBack.
+- Write clear documentation for both humans and AI agents, describing the architecture, tooling, UI conventions, testing rules, networking, and business logic.
+
